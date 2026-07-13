@@ -1,0 +1,992 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Surrey Upon Avon — Shakespeare is yours.</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root {
+    --paper: #F6EDDE;
+    --paper-deep: #EFE2CC;
+    --panel: #FBF5E9;
+    --ink: #2E151A;
+    --ink-soft: #5C3A40;
+    --burgundy: #8E2038;
+    --burgundy-deep: #6B1428;
+    --maroon: #4C0E19;
+    --gold: #AE853B;
+    --rule: #C9B592;
+    --btn-text: #FDF3E3;
+    --cta-bg: #4C0E19;
+    --hero-glow: #EFE2CC;
+    --shadow: 0 18px 40px -22px rgba(76, 14, 25, 0.35);
+
+    --display: "Didot", "Bodoni 72", "Playfair Display", "Times New Roman", serif;
+    --script: "Snell Roundhand", "Apple Chancery", "Brush Script MT", cursive;
+    --body: "Iowan Old Style", "Palatino", "Palatino Linotype", Georgia, serif;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #2C1A20;
+      --paper-deep: #241319;
+      --panel: #392329;
+      --ink: #F5EADB;
+      --ink-soft: #D8BFB2;
+      --burgundy: #D06A7E;
+      --burgundy-deep: #B14A60;
+      --maroon: #E4B98A;
+      --gold: #D9B36A;
+      --rule: #6B434D;
+      --btn-text: #FDF3E3;
+      --cta-bg: #4A2130;
+      --hero-glow: #45262F;
+      --shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+    }
+  }
+  :root[data-theme="light"] {
+    --paper: #F6EDDE;
+    --paper-deep: #EFE2CC;
+    --panel: #FBF5E9;
+    --ink: #2E151A;
+    --ink-soft: #5C3A40;
+    --burgundy: #8E2038;
+    --burgundy-deep: #6B1428;
+    --maroon: #4C0E19;
+    --gold: #AE853B;
+    --rule: #C9B592;
+    --btn-text: #FDF3E3;
+    --cta-bg: #4C0E19;
+    --hero-glow: #EFE2CC;
+    --shadow: 0 18px 40px -22px rgba(76, 14, 25, 0.35);
+  }
+  :root[data-theme="dark"] {
+    --paper: #2C1A20;
+    --paper-deep: #241319;
+    --panel: #392329;
+    --ink: #F5EADB;
+    --ink-soft: #D8BFB2;
+    --burgundy: #D06A7E;
+    --burgundy-deep: #B14A60;
+    --maroon: #E4B98A;
+    --gold: #D9B36A;
+    --rule: #6B434D;
+    --btn-text: #FDF3E3;
+    --cta-bg: #4A2130;
+    --hero-glow: #45262F;
+    --shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.55);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 17px;
+    line-height: 1.65;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  a { color: var(--burgundy); }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- announcement ribbon ---------- */
+  .ribbon {
+    background: var(--burgundy-deep);
+    color: #FDF3E3;
+    text-align: center;
+    padding: 0.55rem 1rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .ribbon a { color: #FDF3E3; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+  .ribbon .star { color: var(--gold); padding: 0 0.6em; }
+
+  /* ---------- nav ---------- */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem clamp(1rem, 4vw, 2.5rem);
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nav-wordmark {
+    font-family: var(--display);
+    font-size: 1rem;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+  }
+  .nav-wordmark .upon {
+    font-family: var(--script);
+    text-transform: none;
+    letter-spacing: 0;
+    font-size: 1.05em;
+    color: var(--burgundy);
+    padding: 0 0.1em;
+  }
+  .nav-links { display: flex; gap: clamp(0.8rem, 2.5vw, 1.6rem); align-items: center; flex-wrap: wrap; }
+  .nav-links a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .nav-links a:hover { color: var(--burgundy); }
+  .nav-links a.nav-cta {
+    color: var(--btn-text);
+    background: var(--burgundy);
+    padding: 0.45rem 0.95rem;
+    border-radius: 2px;
+  }
+  .nav-links a.nav-cta:hover { background: var(--burgundy-deep); }
+  @media (max-width: 720px) {
+    .nav-links a:not(.nav-cta) { display: none; }
+  }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    padding: clamp(2.5rem, 7vw, 5rem) 1.25rem clamp(3rem, 8vw, 5.5rem);
+    background:
+      radial-gradient(ellipse 90% 60% at 50% -10%, var(--hero-glow), transparent 70%),
+      var(--paper);
+  }
+  .playbill-frame {
+    max-width: 880px;
+    margin: 0 auto;
+    border: 4px double var(--gold);
+    outline: 1px solid var(--rule);
+    outline-offset: 6px;
+    padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 5vw, 3.5rem);
+    text-align: center;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+  .logo-mark { margin: 0 auto 1.2rem; display: block; }
+  .masthead {
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 3.5vw, 1.9rem);
+    letter-spacing: 0.28em;
+    margin: 0;
+    text-transform: uppercase;
+  }
+  .masthead .upon {
+    font-family: var(--script);
+    text-transform: none;
+    letter-spacing: 0.02em;
+    font-size: 1.2em;
+    color: var(--burgundy);
+    padding: 0 0.15em;
+  }
+  .est {
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0.7rem 0 0;
+  }
+  .hero-rule {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin: 1.8rem auto;
+    max-width: 420px;
+    color: var(--gold);
+  }
+  .hero-rule::before, .hero-rule::after {
+    content: "";
+    flex: 1;
+    border-top: 1px solid var(--rule);
+  }
+  h1.tagline {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 8vw, 4.8rem);
+    line-height: 1.04;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1.tagline .yours {
+    font-family: var(--script);
+    color: var(--burgundy);
+    font-size: 1.08em;
+  }
+  .hero-sub {
+    max-width: 34rem;
+    margin: 1.4rem auto 0;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+  }
+  .hero-ctas {
+    display: flex;
+    gap: 0.9rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.2rem;
+  }
+  .btn {
+    font-family: var(--body);
+    font-size: 0.85rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 1.6rem;
+    border-radius: 2px;
+    display: inline-block;
+  }
+  .btn-solid {
+    background: var(--burgundy);
+    color: var(--btn-text);
+    border: 1px solid var(--burgundy);
+  }
+  .btn-solid:hover { background: var(--burgundy-deep); border-color: var(--burgundy-deep); }
+  .btn-ghost {
+    color: var(--burgundy);
+    border: 1px solid var(--burgundy);
+    background: transparent;
+  }
+  .btn-ghost:hover { background: color-mix(in srgb, var(--burgundy) 10%, transparent); }
+  .hero-deadline {
+    margin-top: 1.6rem;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+  }
+  .hero-deadline strong { color: var(--burgundy); }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(3rem, 8vw, 5.5rem) 1.25rem; }
+  .wrap { max-width: 1020px; margin: 0 auto; }
+  .wrap-narrow { max-width: 720px; margin: 0 auto; }
+
+  .act-label {
+    text-align: center;
+    font-size: 0.78rem;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.6rem;
+  }
+  h2 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5vw, 3rem);
+    text-align: center;
+    margin: 0 0 0.75rem;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+  .section-intro {
+    text-align: center;
+    color: var(--ink-soft);
+    max-width: 40rem;
+    margin: 0 auto 2.75rem;
+  }
+  .ornament {
+    text-align: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    letter-spacing: 0.8em;
+    padding-left: 0.8em; /* balance letter-spacing trailing gap */
+    margin: 0 0 2.5rem;
+  }
+
+  /* ---------- now playing ---------- */
+  #show { background: var(--paper-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .show-card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+  }
+  @media (max-width: 800px) { .show-card { grid-template-columns: 1fr; } }
+  .show-main { padding: clamp(1.75rem, 5vw, 3rem); }
+  .presents {
+    font-size: 0.78rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 0.5rem;
+  }
+  .show-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    line-height: 1.02;
+    margin: 0 0 0.4rem;
+    color: var(--burgundy);
+  }
+  .show-byline { margin: 0 0 1.4rem; color: var(--ink-soft); font-style: italic; }
+  .show-main p.desc { margin: 0 0 1rem; max-width: 62ch; }
+  .show-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.4rem; }
+  .tag {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule);
+    color: var(--ink-soft);
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+  }
+  .show-side {
+    background: var(--burgundy-deep);
+    color: #F6E7D3;
+    padding: clamp(1.75rem, 5vw, 3rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+  }
+  .show-side h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.05rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin: 0;
+    color: #E8C888;
+  }
+  .dates { margin: 0; }
+  .dates dt {
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D9A9A0;
+    margin-bottom: 0.15rem;
+  }
+  .dates dd {
+    margin: 0 0 0.9rem;
+    font-size: 1.2rem;
+    font-family: var(--display);
+    font-variant-numeric: tabular-nums;
+  }
+  .show-side .fineprint { font-size: 0.8rem; color: #D9A9A0; margin: 0; }
+  .free-badge {
+    align-self: flex-start;
+    border: 1px solid #E8C888;
+    color: #E8C888;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.85rem;
+  }
+
+  /* ---------- auditions ---------- */
+  .aud-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  @media (max-width: 800px) { .aud-grid { grid-template-columns: 1fr; } }
+  .aud-card {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 1.75rem;
+  }
+  .aud-card h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0 0 1rem;
+  }
+  .aud-card ul { margin: 0; padding-left: 1.1rem; }
+  .aud-card li { margin-bottom: 0.65rem; }
+  .aud-card li::marker { color: var(--gold); }
+  .keydates { display: grid; gap: 1rem; margin: 0; }
+  .keydate { display: flex; gap: 1rem; align-items: baseline; }
+  .keydate dt {
+    font-family: var(--display);
+    font-size: 1.15rem;
+    color: var(--burgundy);
+    min-width: 7.5rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .keydate dd { margin: 0; color: var(--ink-soft); }
+
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  @media (max-width: 900px) { .steps { grid-template-columns: 1fr; } }
+  .steps li {
+    counter-increment: step;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--burgundy);
+    padding: 1.4rem 1.4rem 1.5rem;
+  }
+  .steps li::before {
+    content: counter(step);
+    display: block;
+    font-family: var(--display);
+    font-size: 2rem;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.6rem;
+  }
+  .steps h4 { margin: 0 0 0.4rem; font-family: var(--display); font-weight: 500; font-size: 1.1rem; }
+  .steps p { margin: 0; font-size: 0.92rem; color: var(--ink-soft); }
+
+  .aud-cta {
+    text-align: center;
+    background: var(--cta-bg);
+    color: #F6E7D3;
+    padding: clamp(2rem, 5vw, 3rem);
+    border: 4px double var(--gold);
+  }
+  .aud-cta h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 4vw, 2.1rem);
+    margin: 0 0 0.6rem;
+  }
+  .aud-cta p { margin: 0.3rem auto 0; max-width: 40rem; color: #E3C4B8; }
+  .aud-cta .email {
+    font-family: var(--display);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    color: #E8C888;
+    display: inline-block;
+    margin: 1.1rem 0 1.4rem;
+    text-decoration: none;
+    border-bottom: 1px solid #E8C888;
+    padding-bottom: 2px;
+  }
+  .aud-cta .btn-solid { background: var(--gold); border-color: var(--gold); color: #2E151A; }
+  .aud-cta .btn-solid:hover { filter: brightness(1.08); }
+  .aud-cta .fmt { font-size: 0.82rem; color: #C79A8E; margin-top: 1.2rem; }
+  .aud-cta .fmt code {
+    font-family: var(--body);
+    font-style: italic;
+    color: #E3C4B8;
+  }
+  .aud-cta .cta-star { color: #E8C888; font-size: 0.6em; vertical-align: middle; padding: 0 0.5em; }
+  .cta-actions {
+    display: flex;
+    gap: 0.9rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 1.6rem;
+  }
+  .btn-copy {
+    background: transparent;
+    border: 1px solid #E8C888;
+    color: #E8C888;
+    cursor: pointer;
+  }
+  .btn-copy:hover { background: rgba(232, 200, 136, 0.12); }
+
+  /* ---------- cast ---------- */
+  #cast { background: var(--paper-deep); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .house {
+    font-family: var(--display);
+    font-weight: 500;
+    text-align: center;
+    font-size: 1.1rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--burgundy);
+    margin: 2.75rem 0 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .house::before, .house::after { content: ""; flex: 1; border-top: 1px solid var(--rule); }
+  .house svg { flex: none; }
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+  .role {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 1.4rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .role h4 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.35rem;
+    margin: 0;
+  }
+  .role .rel { font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); }
+  .role p { margin: 0; font-size: 0.95rem; color: var(--ink-soft); flex: 1; }
+  .role .age {
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--rule);
+    padding-top: 0.6rem;
+    font-style: italic;
+  }
+  .cast-note {
+    text-align: center;
+    max-width: 44rem;
+    margin: 2.5rem auto 0;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  /* ---------- mission ---------- */
+  .mission-lede {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.25rem, 3vw, 1.7rem);
+    line-height: 1.45;
+    text-align: center;
+    max-width: 46rem;
+    margin: 0 auto 1.5rem;
+    text-wrap: balance;
+  }
+  .mission-lede strong { color: var(--burgundy); font-weight: 500; }
+  .why {
+    max-width: 40rem;
+    margin: 0 auto 3rem;
+    color: var(--ink-soft);
+    text-align: center;
+  }
+  .values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+  }
+  @media (max-width: 800px) { .values { grid-template-columns: 1fr; } }
+  .value {
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    padding: 1.75rem;
+  }
+  .value h3 {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 1.4rem;
+    margin: 0 0 0.7rem;
+    color: var(--burgundy);
+  }
+  .value p { margin: 0; font-size: 0.95rem; color: var(--ink-soft); }
+
+  /* ---------- footer ---------- */
+  footer {
+    background: var(--burgundy-deep);
+    color: #E3C4B8;
+    text-align: center;
+    padding: 3.5rem 1.25rem 2.5rem;
+  }
+  footer .masthead { color: #FDF3E3; font-size: 1.15rem; }
+  footer .masthead .upon { color: #E8C888; }
+  footer .foot-tag { font-family: var(--script); font-size: 1.5rem; color: #E8C888; margin: 0.8rem 0 1.5rem; }
+  footer a { color: #FDF3E3; text-decoration-color: #E8C888; text-underline-offset: 3px; }
+  footer .foot-meta { font-size: 0.85rem; margin: 0.3rem 0; }
+  footer .foot-small { font-size: 0.75rem; color: #C79A8E; margin-top: 2rem; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+</style>
+</head>
+<body>
+
+<div class="ribbon">
+  <span class="star">✦</span>Now casting · Romeo &amp; Juliet · <a href="#auditions">Audition form closes September 11</a><span class="star">✦</span>
+</div>
+
+<nav>
+  <a class="nav-brand" href="#top" aria-label="Surrey Upon Avon home">
+    <span class="nav-wordmark">SURREY <span class="upon">upon</span> AVON</span>
+  </a>
+  <div class="nav-links">
+    <a href="#show">Now Playing</a>
+    <a href="#cast">Cast</a>
+    <a href="#mission">Mission</a>
+    <a href="#contact">Contact</a>
+    <a class="nav-cta" href="#auditions">Audition</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="playbill-frame">
+    <svg class="logo-mark" width="76" height="48" viewBox="0 0 64 40" aria-hidden="true">
+      <g transform="rotate(-8 22 20)">
+        <path d="M8 4 Q22 0 36 4 Q36 21 30 29 Q26 35 22 35 Q18 35 14 29 Q8 21 8 4 Z" fill="var(--burgundy)"/>
+        <ellipse cx="17" cy="13" rx="2.4" ry="3" fill="var(--paper)"/>
+        <ellipse cx="27" cy="13" rx="2.4" ry="3" fill="var(--paper)"/>
+        <path d="M16 26 Q22 21 28 26" stroke="var(--paper)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </g>
+      <g transform="rotate(8 42 20)">
+        <path d="M28 5 Q42 1 56 5 Q56 22 50 30 Q46 36 42 36 Q38 36 34 30 Q28 22 28 5 Z" fill="var(--gold)"/>
+        <ellipse cx="37" cy="14" rx="2.4" ry="3" fill="var(--paper)"/>
+        <ellipse cx="47" cy="14" rx="2.4" ry="3" fill="var(--paper)"/>
+        <path d="M36 23 Q42 29 48 23" stroke="var(--paper)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <p class="masthead">SURREY <span class="upon">upon</span> AVON</p>
+    <p class="est">A youth-led theatre company · Surrey, BC</p>
+    <div class="hero-rule">❦</div>
+    <h1 class="tagline">Shakespeare is <span class="yours">yours.</span></h1>
+    <p class="hero-sub">Theatre by teenagers, for everyone — reviving a new generation's love of the Bard through free, live, unforgettable productions.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-solid" href="#auditions">Audition for Romeo &amp; Juliet</a>
+      <a class="btn btn-ghost" href="#show">See what's playing</a>
+    </div>
+    <p class="hero-deadline">Grades 8–12 · All roles open to any age &amp; gender · Form closes <strong>September 11</strong></p>
+  </div>
+</header>
+
+<section id="show">
+  <div class="wrap">
+    <p class="act-label">Act I · Now Playing</p>
+    <h2>Our First Production</h2>
+    <p class="ornament">❦</p>
+    <div class="show-card reveal">
+      <div class="show-main">
+        <p class="presents">Surrey Upon Avon presents</p>
+        <h3 class="show-title">Romeo &amp; Juliet</h3>
+        <p class="show-byline">By William Shakespeare · Adapted by Jessa Morrison, Hamin Kim &amp; Shannon Zhu</p>
+        <p class="desc">Shakespeare's most famous tragedy has been told time and time again: two teenagers fighting against fate and family in the face of true love. Everyone knows the story — but as time has gone on, people have slowly begun to forget the importance of theatre and Shakespeare.</p>
+        <p class="desc">This radical take on the classic play, set in the vibrant 1970s, is youth-led, widely accessible, and an amazing chance for teenagers to get involved in their community. Juliet and her Romeo head the show in their quick, reckless love — while Mercutio, Friar Lawrence, and the Nurse steal the audience's hearts. This comedy-turned-tragedy pulls you in, only to send you out shaken, heartbroken, and reminded of why theatre matters in the first place.</p>
+        <div class="show-tags">
+          <span class="tag">Set in the 1970s</span>
+          <span class="tag">Youth-led</span>
+          <span class="tag">Comedy-turned-tragedy</span>
+        </div>
+      </div>
+      <aside class="show-side">
+        <svg width="28" height="54" viewBox="0 0 28 54" aria-hidden="true">
+          <circle cx="14" cy="10" r="8.5" fill="#E8C888"/>
+          <path d="M14 10 q2.6 -3.4 -1.3 -4.7 q-5.2 -1.3 -5.6 3.4 q-0.4 5.6 6 5.6 q7 0 6.5 -7" fill="none" stroke="#6B1428" stroke-width="1.4" stroke-linecap="round"/>
+          <path d="M14 19 Q13 34 14 52" stroke="#E8C888" stroke-width="1.6" fill="none"/>
+          <path d="M14 34 q-7 -2 -8.5 -9 q7 2 8.5 9 z" fill="#E8C888"/>
+        </svg>
+        <h3>Performances · May</h3>
+        <dl class="dates">
+          <dt>Evenings</dt>
+          <dd>May 21 · 22 · 28 · 29</dd>
+          <dt>Matinées</dt>
+          <dd>May 22 · 23 · 29 · 30</dd>
+        </dl>
+        <span class="free-badge">Admission Free</span>
+        <p class="fineprint">Dates subject to change. Location: South Surrey, to be announced.</p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="auditions">
+  <div class="wrap">
+    <p class="act-label">Act II · Auditions</p>
+    <h2>Step Into the Spotlight</h2>
+    <p class="section-intro">Auditions are held online through filmed sides — no experience required, every role open to everyone. Here's everything you need to know.</p>
+
+    <div class="aud-grid">
+      <div class="aud-card reveal">
+        <h3>Who can audition</h3>
+        <ul>
+          <li>Any student in <strong>secondary school (grades 8–12)</strong>.</li>
+          <li><strong>Age and gender do not matter for any role.</strong> If you think you're a good fit for Lady Capulet but you're a 13-year-old boy — give it your best shot!</li>
+          <li>Actors must be available for all rehearsals in <strong>South Surrey</strong> (exact location TBD): one or two preliminary meetings in November, a December break, then weekly rehearsals January through the May performances.</li>
+          <li>Some characters involve <strong>stage fighting or stage intimacy</strong> — please read the full description of every character you're interested in.</li>
+        </ul>
+      </div>
+      <div class="aud-card reveal">
+        <h3>Key dates</h3>
+        <dl class="keydates">
+          <div class="keydate"><dt>Sept 11</dt><dd>Audition form closes — filmed sides due by email</dd></div>
+          <div class="keydate"><dt>Sept 16 &amp; 18</dt><dd>Callbacks, in the evenings — we'll email you personally with location and time</dd></div>
+          <div class="keydate"><dt>November</dt><dd>One or two preliminary company meetings</dd></div>
+          <div class="keydate"><dt>Jan – May</dt><dd>Rehearsals in South Surrey</dd></div>
+          <div class="keydate"><dt>May</dt><dd>Performances!</dd></div>
+        </dl>
+        <p style="font-size:0.8rem; color:var(--ink-soft); font-style:italic; margin:1.2rem 0 0;">All dates subject to change.</p>
+      </div>
+    </div>
+
+    <ol class="steps">
+      <li class="reveal">
+        <h4>Pick your roles</h4>
+        <p>Open the audition PDF for each character you're interested in — it contains their audition info and sides. Not every role requires every side, so read each PDF fully. Audition for as many characters as you like.</p>
+      </li>
+      <li class="reveal">
+        <h4>Film your sides</h4>
+        <p>Record each side as a separate video showing your face and upper torso. Upload to YouTube or Google Drive and title each video like: <em>Juliet Monologue – Firstname Lastname</em>.</p>
+      </li>
+      <li class="reveal">
+        <h4>Send one email</h4>
+        <p>Put all your videos in a single email with your name, age, and general location (e.g. Richmond, Vancouver, White Rock). Mention any scheduling conflicts, whether you'd accept other roles, and any questions.</p>
+      </li>
+    </ol>
+
+    <div class="aud-cta reveal">
+      <h3><span class="cta-star">✦</span> Ready? Send your audition to <span class="cta-star">✦</span></h3>
+      <a class="email" href="mailto:surreyuponavon@gmail.com?subject=Romeo%20and%20Juliet%20Audition%20-%20FirstName%20LastName">surreyuponavon@gmail.com</a>
+      <p class="fmt">Title your email exactly: <code>Romeo and Juliet Audition – FirstName LastName</code></p>
+      <div class="cta-actions">
+        <a class="btn btn-solid" id="mailtoBtn" href="mailto:surreyuponavon@gmail.com?subject=Romeo%20and%20Juliet%20Audition%20-%20FirstName%20LastName">Start my audition email</a>
+        <button class="btn btn-copy" id="copyTemplateBtn" type="button">Copy email template</button>
+        <button class="btn btn-copy" id="copyEmailBtn" type="button">Copy email address</button>
+      </div>
+      <p class="fmt">The button opens your email app with the subject line and a fill-in-the-blanks template ready to go. If nothing opens, your device doesn't have a mail app set up — copy the template instead and paste it into Gmail.</p>
+      <p class="fmt">Unless you say otherwise, you'll be considered for all roles — a lovely problem to have.</p>
+    </div>
+  </div>
+</section>
+
+<section id="cast">
+  <div class="wrap">
+    <p class="act-label">Act III · Dramatis Personae</p>
+    <h2>The Characters</h2>
+    <p class="section-intro">Every role is open to every actor, regardless of age or gender. Find the one that speaks to you.</p>
+
+    <h3 class="house">
+      <svg width="18" height="20" viewBox="0 0 24 26" aria-hidden="true">
+        <path d="M12 25.5 L9.4 13 L14.6 13 Z" fill="var(--burgundy)"/>
+        <rect x="5.5" y="10.8" width="13" height="2.4" rx="1.2" fill="var(--gold)"/>
+        <rect x="10.9" y="4.5" width="2.2" height="6.3" rx="1.1" fill="var(--burgundy)"/>
+        <circle cx="12" cy="3.2" r="1.7" fill="var(--gold)"/>
+      </svg>
+      <span>The House of Montague</span>
+    </h3>
+    <div class="cast-grid">
+      <div class="role reveal">
+        <span class="rel">Played 15–16 · any actor age</span>
+        <h4>Romeo</h4>
+        <p>Moody, reckless, and filled with teenage angst — his love for Juliet and poor situation lead him to a violent fate. A teenage boy guided by emotion, recklessness, and love.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">Romeo's cousin</span>
+        <h4>Benvolio</h4>
+        <p>A peaceful, funny teenage boy who loves the company of his friends — and is torn apart by their eventual tragic ends.</p>
+      </div>
+    </div>
+
+    <h3 class="house">
+      <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9.5" fill="var(--burgundy)"/>
+        <path d="M12 12 q3 -4 -1.5 -5.5 q-6 -1.5 -6.5 4 q-0.5 6.5 7 6.5 q8 0 7.5 -8" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span>The House of Capulet</span>
+    </h3>
+    <div class="cast-grid">
+      <div class="role reveal">
+        <span class="rel">Played 13–14 · any actor age</span>
+        <h4>Juliet</h4>
+        <p>Young, feminine, and playful at the beginning, she develops into an independent and rebellious character in pursuit of freedom.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">Juliet's father</span>
+        <h4>Lord Capulet</h4>
+        <p>A once good-natured (and sometimes funny) patriarch who deteriorates under his hatred for the Montagues and his desire to wed his daughter to Count Paris.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">Juliet's mother</span>
+        <h4>Lady Capulet</h4>
+        <p>A hysterical 1970s mob wife who wants to marry off her daughter.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">To Juliet</span>
+        <h4>The Nurse</h4>
+        <p>A magnetic and hilarious presence with a BIG personality, who acts as a mother to Juliet.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">Juliet's cousin · played 16, any actor age</span>
+        <h4>Tybalt</h4>
+        <p>A misguided teenager with a violent temper who jumps at every opportunity to antagonize the Montagues and prove themself.</p>
+      </div>
+    </div>
+
+    <h3 class="house">
+      <svg width="22" height="20" viewBox="0 0 24 22" aria-hidden="true">
+        <path d="M4 19 L4 9 L9 13 L12 6 L15 13 L20 9 L20 19 Z" fill="var(--gold)"/>
+        <circle cx="4" cy="7.2" r="1.4" fill="var(--burgundy)"/>
+        <circle cx="12" cy="4" r="1.4" fill="var(--burgundy)"/>
+        <circle cx="20" cy="7.2" r="1.4" fill="var(--burgundy)"/>
+      </svg>
+      <span>The Court &amp; The Streets of Verona</span>
+    </h3>
+    <div class="cast-grid">
+      <div class="role reveal">
+        <span class="rel">Of Verona</span>
+        <h4>Prince Escalus</h4>
+        <p>A beloved but commanding Prince, trying to keep the peace between the two houses.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">Friend of Romeo · played 16, any actor age</span>
+        <h4>Mercutio</h4>
+        <p>Magnetic, hilarious, and ideally a crowd-pleaser — best friends with Romeo and Benvolio. Ultimately the heart of this play; he drives the comedy.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">A rich young Count · played 17–19, any actor age</span>
+        <h4>Paris</h4>
+        <p>A proper nobleman but naive teenager, in love with Juliet.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">A priest</span>
+        <h4>Friar Lawrence</h4>
+        <p>A meddling but wise priest who acts as a father figure to Romeo.</p>
+      </div>
+      <div class="role reveal">
+        <span class="rel">The ensemble</span>
+        <h4>Peter, Abram, Sampson &amp; Gregory</h4>
+        <p>Comedic named servants who aid the ensemble comedy.</p>
+      </div>
+    </div>
+
+    <p class="cast-note">Some characters require stage fighting or stage intimacy — each character's audition PDF has the details. Read every description for the roles you're interested in.</p>
+  </div>
+</section>
+
+<section id="mission">
+  <div class="wrap">
+    <p class="act-label">Act IV · Our Mission</p>
+    <h2>Why We Take the Stage</h2>
+    <p class="ornament">❦</p>
+    <p class="mission-lede"><strong>Surrey Upon Avon</strong> is a youth-led theatre company based in Surrey, British Columbia, dedicated to making the works of William Shakespeare accessible to fellow high school students through performance and education.</p>
+    <p class="why">Shakespeare's plays have shaped English literature, language, and storytelling for over 400 years — but art does not survive if it is not shared. Too many young people experience Shakespeare as inaccessible or intimidating. We believe these stories deserve to be experienced as they were intended: live, engaging, and shared with a community.</p>
+    <div class="values">
+      <div class="value reveal">
+        <h3>Accessibility</h3>
+        <p>Shakespeare's language can be challenging — it has often left high schoolers, one of the groups most exposed to it through daily English classes, feeling bored, confused, and stupid. No one enjoys feeling that way, and young people write Shakespeare off as a result. Through dynamic performances, we make his plays easier to understand while preserving the richness of the original text.</p>
+      </div>
+      <div class="value reveal">
+        <h3>Affordability</h3>
+        <p>Cost should never be a barrier to experiencing live theatre. Affordability is another reason high schoolers are dissuaded from Shakespeare — so Surrey Upon Avon presents its productions entirely free of charge. It's one more step in opening up the Shakespeare space to more people.</p>
+      </div>
+      <div class="value reveal">
+        <h3>Diversity</h3>
+        <p>Contrary to the belief that Shakespeare is reserved for the elite, his plays were performed in public theatres, watched by audiences from all walks of life — and often performed by teenage actors! Our company is unapologetically young, diverse, queer, and inclusive, creating productions where more people can see themselves reflected both on stage and in the audience.</p>
+      </div>
+      <div class="value reveal">
+        <h3>Fun</h3>
+        <p>Above all, we believe Shakespeare should be enjoyable. Whether through comedy, tragedy, history, or romance, our productions are designed to entertain, inspire, and introduce a new generation to one of history's greatest playwrights.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <svg width="60" height="38" viewBox="0 0 64 40" aria-hidden="true" style="margin-bottom:0.8rem;">
+    <g transform="rotate(-8 22 20)">
+      <path d="M8 4 Q22 0 36 4 Q36 21 30 29 Q26 35 22 35 Q18 35 14 29 Q8 21 8 4 Z" fill="#D98795"/>
+      <ellipse cx="17" cy="13" rx="2.4" ry="3" fill="#4A1420"/>
+      <ellipse cx="27" cy="13" rx="2.4" ry="3" fill="#4A1420"/>
+      <path d="M16 26 Q22 21 28 26" stroke="#4A1420" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </g>
+    <g transform="rotate(8 42 20)">
+      <path d="M28 5 Q42 1 56 5 Q56 22 50 30 Q46 36 42 36 Q38 36 34 30 Q28 22 28 5 Z" fill="#E8C888"/>
+      <ellipse cx="37" cy="14" rx="2.4" ry="3" fill="#4A1420"/>
+      <ellipse cx="47" cy="14" rx="2.4" ry="3" fill="#4A1420"/>
+      <path d="M36 23 Q42 29 48 23" stroke="#4A1420" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    </g>
+  </svg>
+  <p class="masthead">SURREY <span class="upon">upon</span> AVON</p>
+  <p class="foot-tag">Shakespeare is yours.</p>
+  <p class="foot-meta"><a href="mailto:surreyuponavon@gmail.com">surreyuponavon@gmail.com</a></p>
+  <p class="foot-meta">Surrey, British Columbia</p>
+  <p class="foot-small">© Surrey Upon Avon · A youth-led, not-for-profit theatre company · All performances free of charge</p>
+</footer>
+
+<script>
+  (function () {
+    const EMAIL = 'surreyuponavon@gmail.com';
+    const SUBJECT = 'Romeo and Juliet Audition - FirstName LastName';
+    const BODY = [
+      'Hi Surrey Upon Avon team,',
+      '',
+      "My name is [full name], I am [age] years old, and I'm from [general location, e.g. Richmond / Vancouver / White Rock].",
+      '',
+      'I am auditioning for: [character(s)]',
+      '',
+      'Links to my filmed sides:',
+      '- [Side, e.g. Juliet Monologue - Firstname Lastname]: [YouTube or Google Drive link]',
+      '',
+      'Open to being considered for other roles: [yes / no]',
+      'Scheduling conflicts with callbacks, rehearsals, or performances: [none / details]',
+      'Questions or notes: [anything else]',
+      '',
+      'Thank you!',
+      '[full name]'
+    ].join('\n');
+
+    const mailtoBtn = document.getElementById('mailtoBtn');
+    if (mailtoBtn) {
+      mailtoBtn.href = 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(SUBJECT) + '&body=' + encodeURIComponent(BODY);
+    }
+
+    function bindCopy(id, text) {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        const done = function () {
+          const original = btn.textContent;
+          btn.textContent = 'Copied!';
+          btn.disabled = true;
+          setTimeout(function () { btn.textContent = original; btn.disabled = false; }, 1500);
+        };
+        const legacyCopy = function () {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'absolute';
+          ta.style.left = '-9999px';
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          done();
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(done).catch(legacyCopy);
+        } else {
+          legacyCopy();
+        }
+      });
+    }
+    bindCopy('copyEmailBtn', EMAIL);
+    bindCopy('copyTemplateBtn', 'Subject: ' + SUBJECT + '\n\n' + BODY);
+  })();
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const els = document.querySelectorAll('.reveal');
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    els.forEach(el => el.classList.add('in'));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(el => io.observe(el));
+  }
+</script>
+
+</body>
+</html>
